@@ -13,7 +13,7 @@
         
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
+            background-color: #fdffff;
             padding: 20px;
         }
         
@@ -31,33 +31,29 @@
             justify-content: center;
             gap: 15px;
             padding: 25px 20px;
-            background: linear-gradient(135deg, #2c3e50, #3498db);
+            background: #ca252d;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         
         .nav-button {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
+            background: transparent;
+            color: #fdffff;
             padding: 12px 28px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            border: 2px solid #fdca17;
             border-radius: 30px;
             cursor: pointer;
             font-size: 16px;
             font-weight: 600;
             transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
         }
         
         .nav-button:hover {
-            background: rgba(255, 255, 255, 0.3);
-            border-color: rgba(255, 255, 255, 0.6);
+            background: #fdca17;
+            color: #ca252d;
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-        
-        .nav-button.active {
-            background: white;
-            color: #2c3e50;
-            border-color: white;
         }
         
         .menu-page {
@@ -75,19 +71,15 @@
         
         .page-title {
             font-size: 1.8em;
-            color: #2c3e50;
+            color: #ca252d;
             margin-bottom: 20px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
         
-        /* Hide pages by default */
+        /* Show all pages in scroll layout */
         .menu-page {
-            display: none;
-        }
-        
-        .menu-page.active {
             display: block;
         }
         
@@ -126,12 +118,12 @@
     <div class="container">
         <!-- Navigation -->
         <div class="navigation">
-            <button class="nav-button active" onclick="showPage('page1', this)">Menu 1</button>
-            <button class="nav-button" onclick="showPage('page2', this)">Menu 2</button>
+            <button class="nav-button" onclick="scrollToPage('page1')">Menu 1</button>
+            <button class="nav-button" onclick="scrollToPage('page2')">Menu 2</button>
         </div>
         
         <!-- Menu Page 1 -->
-        <div class="menu-page active" id="page1">
+        <div class="menu-page" id="page1">
             <div class="page-title">Menu 1</div>
             <img src="menu-page-1.png" alt="Heraa Restaurants Menu Page 1">
         </div>
@@ -144,20 +136,10 @@
     </div>
     
     <script>
-        function showPage(pageId, button) {
-            // Hide all pages
-            const pages = document.querySelectorAll('.menu-page');
-            pages.forEach(page => page.classList.remove('active'));
-            
-            // Remove active class from all buttons
-            const buttons = document.querySelectorAll('.nav-button');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            
-            // Show selected page
-            document.getElementById(pageId).classList.add('active');
-            
-            // Add active class to clicked button
-            button.classList.add('active');
+        function scrollToPage(pageId) {
+            document.getElementById(pageId).scrollIntoView({
+                behavior: 'smooth'
+            });
         }
     </script>
 </body>
